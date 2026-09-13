@@ -3,7 +3,7 @@
   --banana-deep: #ffd400;
   --ink: #3a2b00;
   --cream: #fff8e1;
-  --shop-yellow: #ffc72c;
+  --nav-height: 4.25rem;
 }
 
 * {
@@ -22,12 +22,143 @@ body {
   background: var(--cream);
 }
 
+a {
+  color: inherit;
+}
+
+/* ---------- nav ---------- */
+
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  height: var(--nav-height);
+  background: var(--cream);
+  border-bottom: 3px solid var(--ink);
+}
+
+.nav-inner {
+  max-width: 72rem;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.nav-brand {
+  font-weight: 800;
+  font-size: 1.15rem;
+  text-decoration: none;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.5vw, 2.25rem);
+}
+
+.nav-link {
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  color: var(--ink);
+  opacity: 0.7;
+  padding: 0.35em 0;
+  border-bottom: 3px solid transparent;
+  transition: opacity 0.15s ease, border-color 0.15s ease;
+}
+
+.nav-link:hover {
+  opacity: 1;
+}
+
+.nav-link.is-active {
+  opacity: 1;
+  border-color: var(--ink);
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 1.6rem;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--ink);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+@media (max-width: 640px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: var(--cream);
+    border-bottom: 3px solid var(--ink);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease;
+  }
+
+  .nav-menu.is-open {
+    max-height: 20rem;
+  }
+
+  .nav-link {
+    padding: 0.9rem 1.25rem;
+    border-bottom: 1px solid rgba(58, 43, 0, 0.12);
+  }
+
+  .nav-link.is-active {
+    background: var(--banana);
+  }
+}
+
+/* ---------- hero ---------- */
+
 .hero {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100svh;
+  min-height: calc(100svh - var(--nav-height));
   overflow: hidden;
   background: radial-gradient(circle at 30% 20%, var(--banana-deep), var(--banana) 70%);
 }
@@ -60,7 +191,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(1.25rem, 4vw, 2.5rem);
   padding: 2rem 1.5rem;
 }
 
@@ -70,32 +200,29 @@ body {
   display: block;
 }
 
-.shop-btn {
-  display: inline-block;
-  font-family: "Baloo 2", system-ui, sans-serif;
-  font-weight: 800;
-  font-size: clamp(1.1rem, 2.8vw, 1.4rem);
-  text-decoration: none;
+/* ---------- placeholder pages ---------- */
+
+.placeholder {
+  min-height: calc(100svh - var(--nav-height));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  background: radial-gradient(circle at 30% 20%, var(--banana-deep), var(--banana) 70%);
+}
+
+.placeholder-img {
+  width: min(70vw, 360px);
+  height: auto;
+  display: block;
+}
+
+.placeholder-caption {
+  margin: 0;
+  font-weight: 700;
+  font-size: clamp(1.05rem, 2.6vw, 1.3rem);
   color: var(--ink);
-  background: var(--shop-yellow);
-  padding: 0.65em 2.2em;
-  border-radius: 999px;
-  border: 3px solid var(--ink);
-  box-shadow: 0.2em 0.24em 0 var(--ink);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.shop-btn:hover {
-  transform: translate(-0.05em, -0.05em) rotate(-2deg);
-  box-shadow: 0.28em 0.32em 0 var(--ink);
-}
-
-.shop-btn:active {
-  transform: translate(0.1em, 0.12em);
-  box-shadow: 0.08em 0.1em 0 var(--ink);
-}
-
-.shop-btn:focus-visible {
-  outline: 3px solid var(--ink);
-  outline-offset: 3px;
 }
