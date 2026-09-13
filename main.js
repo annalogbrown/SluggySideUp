@@ -1,40 +1,68 @@
-// Vanilla JS API (not the React API) — https://motion.dev/docs/animate & /docs/scroll
-import { animate, scroll } from "https://esm.sh/motion@12";
+// Vanilla JS API (not the React API) — https://motion.dev/docs/animate
+import { animate } from "https://cdn.jsdelivr.net/npm/motion@12/+esm";
 
-const hero = document.querySelector(".hero");
-const title = document.querySelector(".hero-title");
-const subtitle = document.querySelector(".hero-subtitle");
-const emoji = document.querySelector(".hero-emoji");
-const scrollCue = document.querySelector(".scroll-cue");
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-// Playful entrance: emoji pops, title bounces up, subtitle fades in after.
-animate(
-  emoji,
-  { opacity: [0, 1], scale: [0.4, 1.15, 1], rotate: [-15, 8, 0] },
-  { duration: 0.7, ease: "backOut" }
-);
+// Nav: hamburger toggle on mobile, shared by every page.
+const navToggle = document.querySelector(".nav-toggle");
+const navMenu = document.querySelector(".nav-menu");
 
-animate(
-  title,
-  { opacity: [0, 1], y: [40, 0], rotate: [-3, 0] },
-  { duration: 0.7, delay: 0.15, ease: "backOut" }
-);
+if (navToggle && navMenu) {
+  navToggle.addEventListener("click", () => {
+    const isOpen = navMenu.classList.toggle("is-open");
+    navToggle.setAttribute("aria-expanded", String(isOpen));
+  });
 
-animate(
-  subtitle,
-  { opacity: [0, 0.75], y: [16, 0] },
-  { duration: 0.6, delay: 0.4, ease: "easeOut" }
-);
+  navMenu.querySelectorAll(".nav-link").forEach((link) => {
+    link.addEventListener("click", () => {
+      navMenu.classList.remove("is-open");
+      navToggle.setAttribute("aria-expanded", "false");
+    });
+  });
+}
 
-// Idle bob on the "scroll" cue to invite scrolling.
-animate(
-  scrollCue,
-  { y: [0, 8, 0] },
-  { duration: 1.6, repeat: Infinity, ease: "easeInOut" }
-);
+// Hero (index): logo scales up and spins in on load.
+const logo = document.querySelector(".logo");
 
-// Scroll-linked parallax/fade: as the hero scrolls out of view, ease it back and fade it.
-scroll(
-  animate(hero, { opacity: [1, 0.2], scale: [1, 0.94] }, { ease: "linear" }),
-  { target: hero, offset: ["start start", "end start"] }
-);
+if (logo && !prefersReducedMotion) {
+  animate(
+    logo,
+    { opacity: [0, 1], scale: [0, 1.08, 1], rotate: [-35, 8, 0] },
+    { duration: 0.9, ease: "backOut" }
+  );
+}
+
+// Placeholder pages: sleeping Sunny fades in, then a trail of Zzz's
+// drifts up and away from her head, one after another, on a loop.
+const placeholderImg = document.querySelector(".placeholder-img");
+
+if (placeholderImg && !prefersReducedMotion) {
+  animate(
+    placeholderImg,
+    { opacity: [0, 1], y: [16, 0] },
+    { duration: 0.6, ease: "easeOut" }
+  );
+}
+
+const zzzEls = document.querySelectorAll(".zzz");
+
+if (zzzEls.length && !prefersReducedMotion) {
+  zzzEls.forEach((el, i) => {
+    const duration = 2.6;
+    const delay = 0.6 + i * 0.6;
+
+    // Straight-line, constant-speed drift up and to the right.
+    animate(
+      el,
+      { x: [0, 18], y: [0, -34] },
+      { duration, repeat: Infinity, ease: "linear", delay }
+    );
+
+    // Fade eases in and out independently of the linear travel.
+    animate(
+      el,
+      { opacity: [0, 1, 1, 0] },
+      { duration, repeat: Infinity, ease: "easeInOut", delay }
+    );
+  });
+}
