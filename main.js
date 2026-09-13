@@ -48,15 +48,21 @@ const zzzEls = document.querySelectorAll(".zzz");
 
 if (zzzEls.length && !prefersReducedMotion) {
   zzzEls.forEach((el, i) => {
+    const duration = 2.6;
+    const delay = 0.6 + i * 0.6;
+
+    // Straight-line, constant-speed drift up and to the right.
     animate(
       el,
-      {
-        opacity: [0, 1, 1, 0],
-        y: [0, -14, -30, -48],
-        x: [0, 4, 9, 16],
-        rotate: [-6, 4, -3, 6],
-      },
-      { duration: 2.6, repeat: Infinity, ease: "easeInOut", delay: 0.6 + i * 0.75 }
+      { x: [0, 18], y: [0, -34] },
+      { duration, repeat: Infinity, ease: "linear", delay }
+    );
+
+    // Fade eases in and out independently of the linear travel.
+    animate(
+      el,
+      { opacity: [0, 1, 1, 0] },
+      { duration, repeat: Infinity, ease: "easeInOut", delay }
     );
   });
 }

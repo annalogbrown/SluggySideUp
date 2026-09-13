@@ -228,7 +228,7 @@ a {
 .zzz {
   position: absolute;
   font-family: "Baloo 2", system-ui, sans-serif;
-  font-weight: 800;
+  font-weight: 600;
   color: var(--ink);
   opacity: 0.85;
   pointer-events: none;
@@ -237,20 +237,32 @@ a {
 
 .zzz--1 {
   top: 4%;
-  left: 22%;
+  left: 20%;
   font-size: clamp(1rem, 3.2vw, 1.3rem);
 }
 
 .zzz--2 {
-  top: -5%;
-  left: 30%;
-  font-size: clamp(1.3rem, 4.2vw, 1.7rem);
+  top: -2%;
+  left: 28%;
+  font-size: clamp(1.2rem, 3.7vw, 1.55rem);
 }
 
 .zzz--3 {
-  top: -15%;
-  left: 39%;
-  font-size: clamp(1.6rem, 5.4vw, 2.2rem);
+  top: -8%;
+  left: 36%;
+  font-size: clamp(1.4rem, 4.2vw, 1.8rem);
+}
+
+.zzz--4 {
+  top: -14%;
+  left: 44%;
+  font-size: clamp(1.6rem, 4.7vw, 2.05rem);
+}
+
+.zzz--5 {
+  top: -20%;
+  left: 52%;
+  font-size: clamp(1.8rem, 5.2vw, 2.3rem);
 }
 
 .placeholder-caption {
