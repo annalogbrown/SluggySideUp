@@ -32,7 +32,8 @@ if (logo && !prefersReducedMotion) {
   );
 }
 
-// Placeholder pages: sleeping Sunny fades in, then breathes gently.
+// Placeholder pages: sleeping Sunny fades in, then a trail of Zzz's
+// drifts up and away from her head, one after another, on a loop.
 const placeholderImg = document.querySelector(".placeholder-img");
 
 if (placeholderImg && !prefersReducedMotion) {
@@ -41,9 +42,21 @@ if (placeholderImg && !prefersReducedMotion) {
     { opacity: [0, 1], y: [16, 0] },
     { duration: 0.6, ease: "easeOut" }
   );
-  animate(
-    placeholderImg,
-    { scale: [1, 1.03, 1] },
-    { duration: 3.5, delay: 0.6, repeat: Infinity, ease: "easeInOut" }
-  );
+}
+
+const zzzEls = document.querySelectorAll(".zzz");
+
+if (zzzEls.length && !prefersReducedMotion) {
+  zzzEls.forEach((el, i) => {
+    animate(
+      el,
+      {
+        opacity: [0, 1, 1, 0],
+        y: [0, -14, -30, -48],
+        x: [0, 4, 9, 16],
+        rotate: [-6, 4, -3, 6],
+      },
+      { duration: 2.6, repeat: Infinity, ease: "easeInOut", delay: 0.6 + i * 0.75 }
+    );
+  });
 }

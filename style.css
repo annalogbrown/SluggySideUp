@@ -214,10 +214,43 @@ a {
   background: radial-gradient(circle at 30% 20%, var(--banana-deep), var(--banana) 70%);
 }
 
+.sleep-figure {
+  position: relative;
+  display: inline-block;
+}
+
 .placeholder-img {
   width: min(70vw, 360px);
   height: auto;
   display: block;
+}
+
+.zzz {
+  position: absolute;
+  font-family: "Baloo 2", system-ui, sans-serif;
+  font-weight: 800;
+  color: var(--ink);
+  opacity: 0.85;
+  pointer-events: none;
+  user-select: none;
+}
+
+.zzz--1 {
+  top: 4%;
+  left: 22%;
+  font-size: clamp(1rem, 3.2vw, 1.3rem);
+}
+
+.zzz--2 {
+  top: -5%;
+  left: 30%;
+  font-size: clamp(1.3rem, 4.2vw, 1.7rem);
+}
+
+.zzz--3 {
+  top: -15%;
+  left: 39%;
+  font-size: clamp(1.6rem, 5.4vw, 2.2rem);
 }
 
 .placeholder-caption {
