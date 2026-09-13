@@ -1,5 +1,5 @@
 // Vanilla JS API (not the React API) — https://motion.dev/docs/animate & /docs/scroll
-import { animate, scroll } from "https://esm.sh/motion@12";
+import { animate, scroll } from "https://cdn.jsdelivr.net/npm/motion@12/+esm";
 
 const hero = document.querySelector(".hero");
 const title = document.querySelector(".hero-title");
