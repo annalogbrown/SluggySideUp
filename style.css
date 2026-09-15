@@ -328,11 +328,9 @@ a {
 .photobook-page {
   min-height: 100svh;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2rem;
   padding: 3rem 1.5rem;
   text-align: center;
   background: radial-gradient(circle at 30% 20%, var(--banana-deep), var(--banana) 70%);
@@ -477,16 +475,15 @@ a {
 }
 
 .photobook-hint {
+  position: absolute;
+  right: 1rem;
+  bottom: 0.9rem;
   margin: 0;
-  max-width: 11rem;
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  font-size: 0.9rem;
+  font-size: 0.65rem;
   color: var(--ink);
-  background: var(--cream);
-  border: 3px solid var(--ink);
-  border-radius: 1rem;
-  padding: 0.9rem 1.1rem;
-  box-shadow: 0.18em 0.22em 0 rgba(58, 43, 0, 0.18);
+  opacity: 0.75;
+  pointer-events: none;
 }

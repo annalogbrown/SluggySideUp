@@ -146,4 +146,15 @@ if (book) {
   pages.slice(0, -1).forEach((page) => {
     page.addEventListener("click", () => turnPage(page));
   });
+
+  // Nudge the "tap to see more" hint on the cover so it catches the eye.
+  const hint = book.querySelector(".photobook-hint");
+
+  if (hint && animate && !prefersReducedMotion) {
+    animate(
+      hint,
+      { rotate: [-6, 6, -6], y: [0, -3, 0] },
+      { duration: 1.4, repeat: Infinity, ease: "easeInOut" }
+    );
+  }
 }
