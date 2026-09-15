@@ -31,7 +31,7 @@
     </nav>
   </header>
 
-  <section class="placeholder">
+  <section class="placeholder placeholder--letter">
     <div class="overlay-figure">
       <img
         class="placeholder-img"
@@ -50,6 +50,19 @@
         <svg viewBox="0 0 32 30"><path d="M16 29C16 29 2 19.5 2 10.5C2 5.8 5.8 2 10.5 2C13 2 15 3.2 16 5.1C17 3.2 19 2 21.5 2C26.2 2 30 5.8 30 10.5C30 19.5 16 29 16 29Z" style="fill: var(--heart-red); stroke: var(--ink); stroke-width: 1.5; stroke-linejoin: round;" /></svg>
       </span>
     </div>
+
+    <form class="contact-card" id="contact-form" action="mailto:sluggysideup@gmail.com" method="get">
+      <h2 class="contact-title">Contact Us</h2>
+      <label class="contact-field">
+        <span>Your email</span>
+        <input type="email" name="email" required placeholder="you@example.com" />
+      </label>
+      <label class="contact-field">
+        <span>Your message</span>
+        <textarea name="message" rows="5" required placeholder="Say hi to Sunny..."></textarea>
+      </label>
+      <button type="submit" class="send-btn">Send</button>
+    </form>
   </section>
 
   <script type="module" src="main.js"></script>
