@@ -66,3 +66,26 @@ if (zzzEls.length && !prefersReducedMotion) {
     );
   });
 }
+
+// Send a Letter: the little hearts above Sunny's head rise up
+// toward the top of the page in a loop, one after another.
+const heartEls = document.querySelectorAll(".floating-heart");
+
+if (heartEls.length && !prefersReducedMotion) {
+  heartEls.forEach((el, i) => {
+    const duration = 4.2;
+    const delay = i * 0.9;
+
+    animate(
+      el,
+      { x: [0, 8 + i * 4], y: [0, -280 - i * 30] },
+      { duration, repeat: Infinity, ease: "linear", delay }
+    );
+
+    animate(
+      el,
+      { opacity: [0, 1, 1, 0] },
+      { duration, repeat: Infinity, ease: "easeInOut", delay }
+    );
+  });
+}
