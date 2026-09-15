@@ -56,6 +56,17 @@ if (logo && animate && !prefersReducedMotion) {
   );
 }
 
+// Hero (index): nametag slides in from the right just after the logo.
+const nametag = document.querySelector(".nametag");
+
+if (nametag && animate && !prefersReducedMotion) {
+  animate(
+    nametag,
+    { opacity: [0, 1], x: [50, 0], rotate: [6, 0] },
+    { duration: 0.7, delay: 0.35, ease: "backOut" }
+  );
+}
+
 // Placeholder pages: sleeping Sunny fades in, then a trail of Zzz's
 // drifts up and away from her head, one after another, on a loop.
 const placeholderImg = document.querySelector(".placeholder-img");
