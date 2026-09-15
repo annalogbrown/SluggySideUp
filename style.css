@@ -474,6 +474,15 @@ a {
   text-underline-offset: 0.15em;
 }
 
+.cover-badge span.cover-title {
+  font-family: "Dancing Script", cursive;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: normal;
+  font-size: clamp(1.7rem, 8vw, 2.4rem);
+  line-height: 1;
+}
+
 .photobook-hint {
   position: absolute;
   right: 1rem;
