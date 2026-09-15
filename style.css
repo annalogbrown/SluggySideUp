@@ -49,9 +49,6 @@ a {
 }
 
 .nav-brand {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
   font-weight: 400;
   font-size: 1.2rem;
   text-transform: uppercase;
@@ -59,12 +56,6 @@ a {
   text-decoration: none;
   color: var(--ink);
   white-space: nowrap;
-}
-
-.nav-brand-icon {
-  height: 1.9rem;
-  width: auto;
-  display: block;
 }
 
 .nav-menu {
