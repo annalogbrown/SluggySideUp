@@ -3,6 +3,7 @@
   --banana-deep: #ffd400;
   --ink: #3a2b00;
   --cream: #fff8e1;
+  --royal-blue: #4169e1;
   --nav-height: 4.25rem;
 }
 
@@ -49,10 +50,12 @@ a {
 }
 
 .nav-brand {
-  font-weight: 800;
-  font-size: 1.15rem;
+  font-weight: 400;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   text-decoration: none;
-  color: var(--ink);
+  color: var(--royal-blue);
   white-space: nowrap;
 }
 
@@ -63,10 +66,12 @@ a {
 }
 
 .nav-link {
-  font-weight: 700;
-  font-size: 1rem;
+  font-weight: 400;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   text-decoration: none;
-  color: var(--ink);
+  color: var(--royal-blue);
   opacity: 0.7;
   padding: 0.35em 0;
   border-bottom: 3px solid transparent;
@@ -79,7 +84,7 @@ a {
 
 .nav-link.is-active {
   opacity: 1;
-  border-color: var(--ink);
+  border-color: var(--royal-blue);
 }
 
 .nav-toggle {
@@ -228,8 +233,8 @@ a {
 .zzz {
   position: absolute;
   font-family: "Baloo 2", system-ui, sans-serif;
-  font-weight: 600;
-  color: var(--ink);
+  font-weight: 400;
+  color: var(--royal-blue);
   opacity: 0.85;
   pointer-events: none;
   user-select: none;
@@ -267,7 +272,9 @@ a {
 
 .placeholder-caption {
   margin: 0;
-  font-weight: 700;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   font-size: clamp(1.05rem, 2.6vw, 1.3rem);
-  color: var(--ink);
+  color: var(--royal-blue);
 }
