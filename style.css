@@ -461,13 +461,19 @@ a {
   box-shadow: 0.2em 0.24em 0 rgba(58, 43, 0, 0.18);
 }
 
-.cover-badge span {
+.cover-badge span,
+.cover-badge a {
   font-family: "Fredoka", system-ui, sans-serif;
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   font-size: clamp(1.1rem, 5vw, 1.6rem);
   color: var(--ink);
+}
+
+.cover-badge a {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
 }
 
 .photobook-hint {
