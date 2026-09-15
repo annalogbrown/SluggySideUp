@@ -474,7 +474,7 @@ a {
   text-underline-offset: 0.15em;
 }
 
-.cover-badge span.cover-title {
+.cover-badge .cover-title {
   font-family: "Dancing Script", cursive;
   font-weight: 700;
   text-transform: none;
