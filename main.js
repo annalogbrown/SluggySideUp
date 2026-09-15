@@ -67,8 +67,7 @@ if (nametag && animate && !prefersReducedMotion) {
   );
 }
 
-// Placeholder pages: sleeping Sunny fades in, then a trail of Zzz's
-// drifts up and away from her head, one after another, on a loop.
+// Send a Letter: Sunny's Valentine artwork fades in on load.
 const placeholderImg = document.querySelector(".placeholder-img");
 
 if (placeholderImg && animate && !prefersReducedMotion) {
@@ -77,29 +76,6 @@ if (placeholderImg && animate && !prefersReducedMotion) {
     { opacity: [0, 1], y: [16, 0] },
     { duration: 0.6, ease: "easeOut" }
   );
-}
-
-const zzzEls = document.querySelectorAll(".zzz");
-
-if (zzzEls.length && animate && !prefersReducedMotion) {
-  zzzEls.forEach((el, i) => {
-    const duration = 2.6;
-    const delay = 0.6 + i * 0.6;
-
-    // Straight-line, constant-speed drift up and to the right.
-    animate(
-      el,
-      { x: [0, 18], y: [0, -34] },
-      { duration, repeat: Infinity, ease: "linear", delay }
-    );
-
-    // Fade eases in and out independently of the linear travel.
-    animate(
-      el,
-      { opacity: [0, 1, 1, 0] },
-      { duration, repeat: Infinity, ease: "easeInOut", delay }
-    );
-  });
 }
 
 // Send a Letter: the little hearts above Sunny's head rise up
@@ -123,4 +99,55 @@ if (heartEls.length && animate && !prefersReducedMotion) {
       { duration, repeat: Infinity, ease: "easeInOut", delay }
     );
   });
+}
+
+// Photobook: a stack of pages that flip open on click, book-style.
+// The book starts "closed" (only the first page/cover showing) and
+// opens itself shortly after load; each page can only be turned once,
+// revealing the page stacked beneath it.
+const book = document.querySelector("#book");
+
+if (book) {
+  const pages = [...book.querySelectorAll(".page")];
+  const total = pages.length;
+
+  pages.forEach((page, i) => {
+    page.style.zIndex = String(total - i);
+  });
+
+  const turnPage = (page) => {
+    if (page.dataset.flipped) return;
+    page.dataset.flipped = "true";
+
+    const settle = () => {
+      page.style.zIndex = "0";
+      page.style.pointerEvents = "none";
+    };
+
+    if (prefersReducedMotion) {
+      page.style.transform = "rotateY(-180deg)";
+      settle();
+    } else if (animate) {
+      animate(page, { rotateY: [0, -180] }, { duration: 0.85, ease: "easeInOut" })
+        .finished.then(settle);
+    } else {
+      // Motion failed to load: flip via a plain CSS transition instead
+      // so the book still works either way.
+      page.style.transition = "transform 0.6s ease";
+      page.addEventListener("transitionend", settle, { once: true });
+      requestAnimationFrame(() => {
+        page.style.transform = "rotateY(-180deg)";
+      });
+    }
+  };
+
+  // Every page but the last can be turned to reveal the next one.
+  pages.slice(0, -1).forEach((page) => {
+    page.addEventListener("click", () => turnPage(page));
+  });
+
+  // Show the closed cover first, then open the book on its own.
+  if (pages[0]) {
+    setTimeout(() => turnPage(pages[0]), prefersReducedMotion ? 0 : 900);
+  }
 }

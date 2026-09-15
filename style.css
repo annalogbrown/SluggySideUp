@@ -4,6 +4,8 @@
   --ink: #3a2b00;
   --cream: #fff8e1;
   --heart-red: #b92d3c;
+  --book-pale: #fff2b8;
+  --book-pale-deep: #ffe98a;
 }
 
 * {
@@ -203,55 +205,6 @@ a {
   display: block;
 }
 
-.zzz {
-  position: absolute;
-  font-family: "Fredoka", system-ui, sans-serif;
-  font-weight: 400;
-  color: var(--ink);
-  opacity: 0.85;
-  pointer-events: none;
-  user-select: none;
-}
-
-.zzz--1 {
-  top: 4%;
-  left: 20%;
-  font-size: clamp(1rem, 3.2vw, 1.3rem);
-}
-
-.zzz--2 {
-  top: -2%;
-  left: 28%;
-  font-size: clamp(1.2rem, 3.7vw, 1.55rem);
-}
-
-.zzz--3 {
-  top: -8%;
-  left: 36%;
-  font-size: clamp(1.4rem, 4.2vw, 1.8rem);
-}
-
-.zzz--4 {
-  top: -14%;
-  left: 44%;
-  font-size: clamp(1.6rem, 4.7vw, 2.05rem);
-}
-
-.zzz--5 {
-  top: -20%;
-  left: 52%;
-  font-size: clamp(1.8rem, 5.2vw, 2.3rem);
-}
-
-.placeholder-caption {
-  margin: 0;
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  font-size: clamp(1.05rem, 2.6vw, 1.3rem);
-  color: var(--ink);
-}
-
 .floating-heart {
   position: absolute;
   display: block;
@@ -369,4 +322,98 @@ a {
 .send-btn:focus-visible {
   outline: 3px solid var(--ink);
   outline-offset: 3px;
+}
+
+/* ---------- photobook ---------- */
+
+.photobook-page {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  background: radial-gradient(circle at 30% 20%, var(--banana-deep), var(--banana) 70%);
+}
+
+.book-stage {
+  perspective: 1800px;
+  width: min(88vw, 440px);
+}
+
+.book {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  margin-left: 16px;
+}
+
+.book-spine {
+  position: absolute;
+  top: -6px;
+  bottom: -6px;
+  left: -16px;
+  width: 22px;
+  background: var(--book-pale-deep);
+  border: 3px solid var(--ink);
+  border-radius: 10px 3px 3px 10px;
+  z-index: 50;
+}
+
+.page {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: var(--book-pale);
+  border: 3px solid var(--ink);
+  border-radius: 4px 16px 16px 4px;
+  box-shadow: 0.4em 0.4em 0 rgba(58, 43, 0, 0.15);
+  transform-style: preserve-3d;
+  transform-origin: left center;
+  backface-visibility: hidden;
+  cursor: pointer;
+}
+
+.page:last-child {
+  cursor: default;
+}
+
+.page-art {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-art img {
+  max-width: 92%;
+  max-height: 92%;
+  object-fit: contain;
+  filter: drop-shadow(0.15em 0.2em 0 rgba(58, 43, 0, 0.18));
+}
+
+.page[data-page="1"] .page-art img,
+.page[data-page="3"] .page-art img,
+.page[data-page="5"] .page-art img {
+  transform: rotate(-3deg);
+}
+
+.page[data-page="2"] .page-art img,
+.page[data-page="4"] .page-art img {
+  transform: rotate(2.5deg);
+}
+
+.photobook-hint {
+  margin: 0;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.9rem;
+  opacity: 0.75;
 }
