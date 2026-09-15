@@ -102,8 +102,9 @@ if (heartEls.length && animate && !prefersReducedMotion) {
 }
 
 // Photobook: a stack of pages that flip open on click, book-style.
-// The book starts "closed" (only the first page/cover showing) and
-// opens itself shortly after load; each page can only be turned once,
+// The book starts closed on its title cover and stays that way until
+// the visitor clicks it — no auto-open. Pages are bound at the top
+// (like a spiral memo pad) and flip up and over on click, each one
 // revealing the page stacked beneath it.
 const book = document.querySelector("#book");
 
@@ -125,10 +126,10 @@ if (book) {
     };
 
     if (prefersReducedMotion) {
-      page.style.transform = "rotateY(-180deg)";
+      page.style.transform = "rotateX(180deg)";
       settle();
     } else if (animate) {
-      animate(page, { rotateY: [0, -180] }, { duration: 0.85, ease: "easeInOut" })
+      animate(page, { rotateX: [0, 180] }, { duration: 0.85, ease: "easeInOut" })
         .finished.then(settle);
     } else {
       // Motion failed to load: flip via a plain CSS transition instead
@@ -136,7 +137,7 @@ if (book) {
       page.style.transition = "transform 0.6s ease";
       page.addEventListener("transitionend", settle, { once: true });
       requestAnimationFrame(() => {
-        page.style.transform = "rotateY(-180deg)";
+        page.style.transform = "rotateX(180deg)";
       });
     }
   };
@@ -145,9 +146,4 @@ if (book) {
   pages.slice(0, -1).forEach((page) => {
     page.addEventListener("click", () => turnPage(page));
   });
-
-  // Show the closed cover first, then open the book on its own.
-  if (pages[0]) {
-    setTimeout(() => turnPage(pages[0]), prefersReducedMotion ? 0 : 900);
-  }
 }
