@@ -27,92 +27,100 @@ a {
   color: inherit;
 }
 
+/* ---------- splash ---------- */
+
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--banana);
+  cursor: pointer;
+}
+
+.pan-group {
+  position: relative;
+  width: min(78vw, 420px);
+  aspect-ratio: 460 / 320;
+}
+
+.pan {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.splash-logo {
+  position: absolute;
+  left: 10%;
+  top: 14%;
+  width: 48%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0.15em 0.2em 0 rgba(0, 0, 0, 0.3));
+}
+
 /* ---------- nav ---------- */
 
 .site-nav {
   position: fixed;
-  top: 3rem;
-  right: 1.25rem;
+  top: 1.25rem;
+  left: 0;
+  right: 0;
   z-index: 20;
-}
-
-.nav-toggle {
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  gap: 5px;
-  width: 2.5rem;
-  height: 2.5rem;
-  margin-left: auto;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  padding: 0;
-}
-
-.nav-toggle span {
-  display: block;
-  width: 1.6rem;
-  height: 3px;
-  border-radius: 2px;
-  background: var(--ink);
-  transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-.nav-toggle[aria-expanded="true"] span:nth-child(1) {
-  transform: translateY(8px) rotate(45deg);
-}
-
-.nav-toggle[aria-expanded="true"] span:nth-child(2) {
-  opacity: 0;
-}
-
-.nav-toggle[aria-expanded="true"] span:nth-child(3) {
-  transform: translateY(-8px) rotate(-45deg);
+  padding: 0 1rem;
+  pointer-events: none;
 }
 
 .nav-menu {
-  position: absolute;
-  top: calc(100% + 0.6rem);
-  right: 0;
-  min-width: 11rem;
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  background: var(--cream);
-  border: 3px solid var(--ink);
-  border-radius: 0.9rem;
-  overflow: hidden;
-  max-height: 0;
-  opacity: 0;
-  pointer-events: none;
-  transition: max-height 0.25s ease, opacity 0.2s ease;
-}
-
-.nav-menu.is-open {
-  max-height: 20rem;
-  opacity: 1;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
   pointer-events: auto;
 }
 
 .nav-link {
+  font-family: inherit;
   font-weight: 400;
-  font-size: 0.95rem;
+  font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   text-decoration: none;
   color: var(--ink);
-  padding: 0.85rem 1.1rem;
-  border-bottom: 1px solid rgba(58, 43, 0, 0.12);
+  background: var(--banana);
+  padding: 0.55em 1.1em;
+  border-radius: 999px;
+  border: 3px solid var(--ink);
+  box-shadow: 0.15em 0.18em 0 var(--ink);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.nav-link:last-child {
-  border-bottom: none;
+.nav-link:hover {
+  transform: scale(1.08) translate(-0.03em, -0.03em);
+  box-shadow: 0.2em 0.24em 0 var(--ink);
+}
+
+.nav-link:active {
+  transform: translate(0.08em, 0.1em) scale(0.98);
+  box-shadow: 0.05em 0.06em 0 var(--ink);
+}
+
+.nav-link:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
 }
 
 .nav-link.is-active {
-  background: var(--banana);
+  background: var(--banana-deep);
+  transform: translate(0.08em, 0.1em);
+  box-shadow: 0.05em 0.06em 0 var(--ink);
 }
 
 /* ---------- hero ---------- */
@@ -153,16 +161,19 @@ a {
   position: relative;
   z-index: 1;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(1.5rem, 4vw, 3rem);
+  gap: 1.25rem;
   padding: 2rem 1.5rem;
 }
 
 .logo {
-  width: min(42vw, 300px);
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  z-index: 1;
+  width: min(26vw, 170px);
   height: auto;
   display: block;
 }
@@ -171,6 +182,22 @@ a {
   width: min(46vw, 340px);
   height: auto;
   display: block;
+}
+
+.hero-blurb {
+  width: min(46vw, 340px);
+  background: var(--cream);
+  border: 3px solid var(--ink);
+  border-radius: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0.2em 0.24em 0 rgba(58, 43, 0, 0.18);
+}
+
+.hero-blurb p {
+  margin: 0;
+  font-size: clamp(0.9rem, 2.2vw, 1rem);
+  line-height: 1.5;
+  color: var(--ink);
 }
 
 /* ---------- placeholder pages ---------- */
@@ -495,4 +522,24 @@ a {
   color: var(--ink);
   opacity: 0.75;
   pointer-events: none;
+}
+
+/* Nav wraps to two rows on narrow phones — give page content extra
+   headroom so it doesn't crowd underneath. */
+@media (max-width: 480px) {
+  .hero,
+  .placeholder,
+  .photobook-page {
+    padding-top: 6rem;
+  }
+
+  .logo {
+    top: 6.5rem;
+    left: 1rem;
+    width: min(30vw, 140px);
+  }
+
+  .hero-blurb {
+    width: min(84vw, 400px);
+  }
 }
