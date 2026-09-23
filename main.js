@@ -35,7 +35,14 @@ if (logo && animate && !prefersReducedMotion) {
     logo,
     { opacity: [0, 1], scale: [0, 1.08, 1], rotate: [-35, 8, 0] },
     { duration: 0.9, ease: "backOut" }
-  );
+  ).finished.then(() => {
+    // Idle wiggle once it's settled in, to keep the little corner logo lively.
+    animate(
+      logo,
+      { rotate: [-4, 4, -4] },
+      { duration: 2.2, repeat: Infinity, ease: "easeInOut" }
+    );
+  });
 }
 
 // Hero (index): nametag slides in from the right just after the logo.
