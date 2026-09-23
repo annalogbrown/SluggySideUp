@@ -44,7 +44,7 @@ if (splash) {
     shakeAnimation = animate(
       panGroup,
       { rotate: [-3, 3, -2, 2, -3], y: [0, -3, 1, -3, 0] },
-      { duration: 0.55, repeat: Infinity, ease: "easeInOut" }
+      { duration: 1.6, repeat: Infinity, ease: "easeInOut" }
     );
   }
 

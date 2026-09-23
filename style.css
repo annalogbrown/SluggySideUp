@@ -56,9 +56,9 @@ a {
 
 .splash-logo {
   position: absolute;
-  left: 4%;
-  top: 6%;
-  width: 58%;
+  left: 10%;
+  top: 14%;
+  width: 48%;
   height: auto;
   display: block;
   filter: drop-shadow(0.15em 0.2em 0 rgba(0, 0, 0, 0.3));
