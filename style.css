@@ -27,6 +27,43 @@ a {
   color: inherit;
 }
 
+/* ---------- splash ---------- */
+
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--banana);
+  cursor: pointer;
+}
+
+.pan-group {
+  position: relative;
+  width: min(78vw, 420px);
+  aspect-ratio: 460 / 320;
+}
+
+.pan {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.splash-logo {
+  position: absolute;
+  left: 4%;
+  top: 6%;
+  width: 58%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0.15em 0.2em 0 rgba(0, 0, 0, 0.3));
+}
+
 /* ---------- nav ---------- */
 
 .site-nav {
@@ -500,5 +537,9 @@ a {
     top: 6.5rem;
     left: 1rem;
     width: min(30vw, 140px);
+  }
+
+  .hero-blurb {
+    width: min(84vw, 400px);
   }
 }

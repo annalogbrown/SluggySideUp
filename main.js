@@ -27,10 +27,72 @@ if (contactForm) {
   });
 }
 
-// Hero (index): logo scales up and spins in on load.
+// Splash (index): a frying pan shakes the logo until the visitor taps it,
+// then it shrinks and flies into the corner spot the real logo lives in.
+const splash = document.querySelector("#splash");
+
+if (splash) {
+  document.body.style.overflow = "hidden";
+
+  const panGroup = splash.querySelector(".pan-group");
+  const pan = splash.querySelector(".pan");
+  const splashLogo = splash.querySelector(".splash-logo");
+  const realLogo = document.querySelector(".logo");
+
+  let shakeAnimation = null;
+  if (panGroup && animate && !prefersReducedMotion) {
+    shakeAnimation = animate(
+      panGroup,
+      { rotate: [-3, 3, -2, 2, -3], y: [0, -3, 1, -3, 0] },
+      { duration: 0.55, repeat: Infinity, ease: "easeInOut" }
+    );
+  }
+
+  const enterSite = () => {
+    if (splash.dataset.entered) return;
+    splash.dataset.entered = "true";
+    document.body.style.overflow = "";
+    if (shakeAnimation) shakeAnimation.stop();
+
+    if (splashLogo && realLogo && animate && !prefersReducedMotion) {
+      const from = splashLogo.getBoundingClientRect();
+      const to = realLogo.getBoundingClientRect();
+      const scale = to.width / from.width;
+      const dx = to.left + to.width / 2 - (from.left + from.width / 2);
+      const dy = to.top + to.height / 2 - (from.top + from.height / 2);
+
+      if (pan) {
+        animate(pan, { opacity: [1, 0] }, { duration: 0.35, ease: "easeIn" });
+      }
+      animate(splash, { opacity: [1, 0] }, { duration: 0.6, ease: "easeInOut", delay: 0.25 });
+
+      animate(
+        splashLogo,
+        { x: [0, dx], y: [0, dy], scale: [1, scale], rotate: [0, 360] },
+        { duration: 0.7, ease: "easeInOut" }
+      ).finished.then(() => {
+        splash.style.display = "none";
+        animate(
+          realLogo,
+          { rotate: [-4, 4, -4] },
+          { duration: 2.2, repeat: Infinity, ease: "easeInOut" }
+        );
+      });
+    } else {
+      // No Motion, or reduced motion: skip straight to the real page.
+      splash.style.display = "none";
+    }
+  };
+
+  splash.addEventListener("click", enterSite);
+}
+
+// Hero (index): logo scales up and spins in on load — skipped when a
+// splash screen is present, since its shrink-in animation serves as
+// the entrance instead.
 const logo = document.querySelector(".logo");
 
-if (logo && animate && !prefersReducedMotion) {
+if (logo && animate && !prefersReducedMotion && !splash) {
   animate(
     logo,
     { opacity: [0, 1], scale: [0, 1.08, 1], rotate: [-35, 8, 0] },
